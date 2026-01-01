@@ -1,0 +1,184 @@
+:root {
+    --sunrise-level: 0; /* 0 to 1 */
+    --sky-dark: hsl(240, 60%, 10%);
+    --sky-light: hsl(190, 26%, 63%); /* Noon/Day */
+    --sky-sunrise: hsl(30, 90%, 60%); /* Orange sunrise */
+}
+
+h1{
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 20px rgba(255,215,0,0.5);
+}
+#display-area {
+    position: relative;
+    width: 80%;
+    height: 100%;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+    /* Sky color interpolates based on sunrise level. 
+       We'll handle complex interpolation in JS or simple transition here.
+       Let's use a simple background transition for now, but JS might update strictly.
+       User asked for "background-color" to represent sky.
+    */
+    background-color: var(--sky-dark);
+    transition: background-color 0.1s linear;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.scene-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#sun {
+    position: absolute;
+    bottom: -150px; /* Start below horizon */
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #ffdd00 20%, #ffaa00 80%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #ffaa00;
+    transition: bottom 0.1s linear, transform 0.1s linear;
+    z-index: 1;
+    left: 40%;
+    transform: translateX(-50%);
+}
+
+#fuji {
+    position: absolute;
+    bottom: 0;
+    width: 100vw; /* Wider fuji */
+    height: auto;
+    z-index: 2;
+    filter: brightness(0.2); /* Start dark */
+    transition: filter 0.1s linear;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#title {
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#ume {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    left: 30%;
+    bottom: -5%;
+    z-index: 3;
+    pointer-events: none;
+    transition-delay: 0.1s;
+}
+#uma-right {
+    position: absolute;
+    width: 20%;
+    height: 25%;
+    left: 5%;
+    bottom: 5%;
+    z-index: 3;
+    pointer-events: none;
+    transition-delay: 0.3s;
+}
+#uma-left {
+    position: absolute;
+    width: 20%;
+    height: 25%;
+    right: 30%;
+    bottom: 20%;
+    z-index: 3;
+    pointer-events: none;
+    transition-delay: 0.5s;
+}
+#tako {
+    position: absolute;
+    width: 10%;
+    height: 12%;
+    right: 5%;
+    top: 15%;
+    z-index: 3;
+    pointer-events: none;
+    transition-delay: 0.7s;
+}
+#daruma {
+    position: absolute;
+    width: 11%;
+    height: 15%;
+    right: 15%;
+    top: 50%;
+    z-index: 3;
+    pointer-events: none;
+    transition-delay: 0.2s;
+}
+
+.instructions {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 100;
+}
+
+/* Visibility State classes */
+.visible {
+    opacity: 1 !important;
+}
+
+.pop-up-item {
+    opacity: 0;
+    transform: translateY(100px) scale(0.5);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease-out;
+}
+
+.pop-up-item.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+#banzai-prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5vh;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+#banzai-prompt.fade-out {
+    opacity: 0;
+}

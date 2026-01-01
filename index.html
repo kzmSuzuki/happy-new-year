@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Banzai!</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MediaPipe -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="display-area">
+    <div id="sky"></div>
+    
+    <div class="scene-container">
+        <!-- Sun (CSS) -->
+        <div id="sun"></div>
+        
+        <img id="fuji" src="assets/fuji_clean.png" alt="Mount Fuji" class="landscape-element">
+        <img id="ume" src="assets/ume.png" alt="Ume" class="landscape-element pop-up-item">
+        <img id="daruma" src="assets/daruma.png" alt="Daruma" class="landscape-element pop-up-item">
+        <img id="uma-left" src="assets/uma_left.png" alt="Uma" class="landscape-element pop-up-item">
+        <img id="uma-right" src="assets/uma_right.png" alt="Uma" class="landscape-element pop-up-item">
+        <img id="tako" src="assets/tako.png" alt="Tako" class="landscape-element pop-up-item">
+
+        <!-- Hidden initially -->
+        <div id="title">
+             <h1>Happy New Year !!</h1>
+        </div>
+
+        <div id="banzai-prompt">🙌</div>
+
+    </div>
+
+    <video id="input_video" style="display:none"></video>
+    <canvas id="output_canvas" style="display:none"></canvas> <!-- For debugging if needed -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
